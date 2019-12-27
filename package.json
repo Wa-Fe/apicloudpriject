@@ -1,0 +1,38 @@
+{
+  "_from": "apicloudproject",
+  "_id": "apicloudproject@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-0PPCMGyNXGt7A0mbhwinrJDp7nlfaB6X57elP+3lADA8Xe4NCKx3sl2ZQgQvHdZQPJAYs3FLwYz3B0rO4aWApQ==",
+  "_location": "/apicloudproject",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "apicloudproject",
+    "name": "apicloudproject",
+    "escapedName": "apicloudproject",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/apicloudproject/-/apicloudproject-1.0.0.tgz",
+  "_shasum": "9f6d713adbd202d810d0e4799e911b20d5a2932d",
+  "_spec": "apicloudproject",
+  "_where": "/Users/wangyalong/Documents/te/test",
+  "author": "",
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "apicloudproject",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

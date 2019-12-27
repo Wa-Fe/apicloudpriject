@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" href='https://at.alicdn.com/t/font_1539842_b0epoi68008.css'>
+    <style>
+        html,
+        body {
+            background-color: #fff;
+        }
+
+        #footer {
+            border: 1px solid #ddd;
+        }
+
+        .aui-bar-tab .aui-active {
+            color: #4BAEF6;
+        }
+    </style>
+</head>
+
+<body>
+    <header id='wrap'></header>
+
+    </div>
+    <footer class="aui-bar aui-bar-tab" id="footer">
+        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'frame1',0)">
+            <span class="iconfont iconhome"></span>
+            <div class="aui-bar-tab-label">frame1</div>
+        </div>
+        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'frame2',1)">
+            <span class="iconfont iconjiaoyi"></span>
+            <div class="aui-bar-tab-label">frame2</div>
+        </div>
+        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'frame3',2)">
+            <span class="iconfont iconyouxi"></span>
+            <div class="aui-bar-tab-label">frame3</div>
+        </div>
+        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'frame4',3)">
+            <span class="iconfont iconmine"></s>
+                <div class="aui-bar-tab-label">frame4</div>
+        </div>
+
+    </footer>
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+       
+      
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            // api.alert({msg: 'eventType'});
+            if (window.isExit) {
+                api.closeWidget({
+                    id: 'A6017010795430', //在项目根目录 config.xml 的 <widget> 标记 的 id 属性
+                    silent: true
+                });
+            } else {
+                api.toast({
+                    msg: '再按一次退出应用',
+                    duration: 1000,
+                    location: 'bottom'
+                });
+
+                window.isExit = true;
+                setTimeout(function () {
+                    window.isExit = false;
+                }, 1000);
+            }
+        });
+
+
+
+        //解析元素 tapmode 属性，优化点击事件处理
+        api.parseTapmode();
+        //顶部的高度
+        var header = $api.byId('wrap');
+        //底部的高度
+        var footer = $api.byId('footer')
+        $api.fixStatusBar(header);
+        // $api.fixTabBar(footer)
+
+        //设置状态栏的样式以及颜色
+        var headerPos = $api.offset(header);
+        var body_h = api.winHeight;
+        var footer_h = $api.offset(footer);
+        api.openFrameGroup({
+            name: 'footer_tab_demo',
+            scrollEnabled: false,
+            rect: {
+                x: 0,
+                y: headerPos.h - 1,
+                w: 'auto',
+                h: body_h - headerPos.h - footer_h.h + 1
+            },
+            index: 0,
+            preload: 0,
+            frames: [{
+                    name: 'frame1',
+                    url: './frame1.html',
+                    bounces: false,
+                    bgColor: '#fff'
+                }, {
+                    name: 'frame2',
+                    url: './frame2.html',
+                    bounces: false,
+                    bgColor: '#fff'
+                }, {
+                    name: 'frame3',
+                    url: './frame3.html',
+                    bounces: false,
+                    bgColor: '#fff',
+                    allowEdit: true,
+                }, {
+                    name: 'frame4',
+                    url: './frame4.html',
+                    bounces: false,
+                    bgColor: '#fff',
+                    allowEdit:true
+                },
+
+
+            ]
+        }, function (ret, err) {
+            var footer = $api.byId('footer');
+            var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
+            $api.removeCls(footerAct, 'aui-active');
+            var name = ret.name;
+            var index = ret.index;
+            if (index == 0) {
+                $api.addCls($api.byId('tabbar1'), 'aui-active');
+            } else if (index == 1) {
+                $api.addCls($api.byId('tabbar2'), 'aui-active');
+            } else if (index == 2) {
+                $api.addCls($api.byId('tabbar3'), 'aui-active');
+            } else if (index == 3) {
+                $api.addCls($api.byId('tabbar4'), 'aui-active');
+            }
+        })
+    }
+
+    function closeWin() {
+        api.closeWin();
+    }
+
+    function randomSwitchBtn(obj, name, index) {
+        var footer = $api.byId('footer');
+        var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
+        $api.removeCls(footerAct, 'aui-active');
+        $api.addCls(obj, 'aui-active');
+        api.setFrameGroupIndex({
+            name: 'footer_tab_demo',
+            index: index,
+            scroll: false,
+        });
+    }
+</script>
+
+</html>
